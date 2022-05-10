@@ -82,5 +82,91 @@ function App() {
 }
 
 export default App;
+```
 
+Criando components e Navbar
+components/Navbar/Navbar.js Navbar/Navbar.css
+
+Criando tambem o Footer/Footer.js Footer/Footer.css
+
+Agora importamos eles na App.js
+
+```tsx
+import "./App.css";
+
+//router
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+//Pages
+import { Home } from "./pages/Home/Home";
+import { Login } from "./pages/Auth/Login";
+import { Register } from "./pages/Auth/Register";
+import { Navbar } from "./components/Navbar/Navbar";
+import { Footer } from "./components/Footer/Footer";
+
+function App() {
+  return (
+    <div className="App">
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+        </Routes>
+        <Footer />
+      </BrowserRouter>
+    </div>
+  );
+}
+
+export default App;
+```
+
+Estruturando o Footer
+
+```tsx
+import React from "react";
+import "./Footer.css";
+
+export const Footer = () => {
+  return (
+    <footer id="footer">
+      <p>ReactGram &copy; 2002</p>
+    </footer>
+  );
+};
+```
+
+Estruturando o Navbar
+
+```tsx
+//importamos
+import { NavLink, Link } from "react-router-dom";
+
+//icones // Bs do bootstrap icons
+import {
+  BsSearch,
+  BsHouseDoorFill,
+  BsFillPersonFill,
+  BsFillCameraFill,
+} from "react-icons/bs";
+
+export const Navbar = () => {
+  return (
+    <nav id="nav">
+      <Link to={"/"}>ReactGram</Link>
+      <form>
+        <BsSearch />
+        <input type="text" />
+      </form>
+      <ul id="nav-links">
+        <NavLink to={"/"}>
+          <BsHouseDoorFill />
+        </NavLink>
+        <NavLink to={"/login"}>Entrar</NavLink>
+        <NavLink to={"/register"}>Cadastrar</NavLink>
+      </ul>
+    </nav>
+  );
+};
 ```
