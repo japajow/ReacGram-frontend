@@ -26,3 +26,61 @@ body {
   color: #fafafa;
 }
 ```
+
+## Configurando React Router
+
+no App.js importamos BrowserRouter , Routes, Route , Navigate
+
+```tsx
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+
+import "./App.css";
+
+//router
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+function App() {
+  return (
+    <div className="App">
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+        </Routes>
+      </BrowserRouter>
+    </div>
+  );
+}
+
+export default App;
+```
+
+Criamos o components/Home/Home.js Home/Home.css Auth/Login.js Auth/Register.js Auth/Auth.css
+
+configuramos as rotas no App.js
+
+```tsx
+import "./App.css";
+
+//router
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+//Pages
+import { Home } from "./pages/Home/Home";
+import { Login } from "./pages/Auth/Login";
+import { Register } from "./pages/Auth/Register";
+
+function App() {
+  return (
+    <div className="App">
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+        </Routes>
+      </BrowserRouter>
+    </div>
+  );
+}
+
+export default App;
+
+```
