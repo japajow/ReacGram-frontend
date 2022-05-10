@@ -140,10 +140,11 @@ export const Footer = () => {
 Estruturando o Navbar
 
 ```tsx
-//importamos
-import { NavLink, Link } from "react-router-dom";
+import React from "react";
+import "./Navbar.css";
 
-//icones // Bs do bootstrap icons
+//components
+import { NavLink, Link } from "react-router-dom";
 import {
   BsSearch,
   BsHouseDoorFill,
@@ -157,16 +158,134 @@ export const Navbar = () => {
       <Link to={"/"}>ReactGram</Link>
       <form>
         <BsSearch />
-        <input type="text" />
+        <input type="text" placeholder="pesquisar..." />
       </form>
       <ul id="nav-links">
-        <NavLink to={"/"}>
-          <BsHouseDoorFill />
-        </NavLink>
-        <NavLink to={"/login"}>Entrar</NavLink>
-        <NavLink to={"/register"}>Cadastrar</NavLink>
+        <li>
+          <NavLink to={"/"}>
+            <BsHouseDoorFill />
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to={"/login"}>Entrar</NavLink>
+        </li>
+        <li>
+          <NavLink to={"/register"}>Cadastrar</NavLink>
+        </li>
       </ul>
     </nav>
   );
 };
+```
+
+## Estilizando o navbar e footer
+
+Footer.css
+
+```css
+#footer {
+  background-color: #121212;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid #363636;
+}
+```
+
+no App.js aonde tem o Routes vamos fazer um wrap nele com uma div
+
+```tsx
+import "./App.css";
+
+//router
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+//Pages
+import { Home } from "./pages/Home/Home";
+import { Login } from "./pages/Auth/Login";
+import { Register } from "./pages/Auth/Register";
+
+//components
+
+import { Footer } from "./components/Footer/Footer";
+import { Navbar } from "./components/Navbar/Navbar";
+
+function App() {
+  return (
+    <div className="App">
+      <BrowserRouter>
+        <Navbar />
+        <div className="container">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+          </Routes>
+        </div>
+        <Footer />
+      </BrowserRouter>
+    </div>
+  );
+}
+
+export default App;
+```
+
+No App.css
+
+```css
+.container {
+  min-height: 70vh;
+}
+```
+
+estilizando a navbar
+Navbar.css
+
+```css
+#nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #000;
+  border-bottom: 1px solid #363636;
+  padding: 1em 1em;
+}
+
+#search-form {
+  position: relative;
+  width: 20%;
+}
+
+#search-form svg {
+  position: absolute;
+  top: 10px;
+  left: 9px;
+}
+
+#search-form input {
+  padding-left: 2.5em;
+  border: none;
+  border-radius: 5px;
+  width: 100%;
+  margin: 0;
+}
+
+#nav-links {
+  display: flex;
+  align-items: center;
+}
+
+#nav-links li {
+  margin-right: 1em;
+  
+}
+
+#nav-links span {
+  cursor: pointer;
+}
+
+#nav-links svg {
+  font-size: 1.5em;
+}
 ```
