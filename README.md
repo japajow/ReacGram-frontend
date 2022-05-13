@@ -310,7 +310,7 @@ export const Register = () => {
     e.preventDefault();
   };
   return (
-    <div>
+    <div id="register">
       <h2>ReactGram</h2>
       <p className="subtitle">Cadastre-se para ver as fotos dos seus amigos </p>
       <form onSubmit={handleSubmit}>
@@ -422,4 +422,98 @@ input[type="submit"]:hover {
 .hide {
   display: none;
 }
+```
+
+## CSS form de autenticação
+
+Auth.css
+
+```css
+#login,
+#register {
+  border: 1px solid #363636;
+  background-color: #000;
+  padding: 1.5em 2em;
+  max-width: 33%;
+  margin: 2em auto;
+}
+
+#login h2,
+#register h2 {
+  font-size: 2em;
+  text-align: center;
+  margin-top: 0;
+}
+
+.subtitle {
+  font-weight: bold;
+  color: #999;
+  margin-bottom: 1.5em;
+}
+
+#login form,
+#register form {
+  padding-bottom: 1.5em;
+  margin-bottom: 1.5em;
+  border-bottom: 1px solid #363636;
+}
+
+#login p,
+#register p {
+  text-align: center;
+}
+
+#login p a,
+#register p a {
+  font-weight: bold;
+  color: #0084f6;
+}
+```
+
+## Criando o state do form de cadastro
+
+Resgister.js
+
+```tsx
+//Criamos os estados do inputs
+
+const [name, setName] = useState("");
+const [email, setEmail] = useState("");
+const [password, setPassword] = useState("");
+const [confirmPassword, setConfirmPassword] = useState("");
+
+//dentro do handleSubmit criamos o user com os estados
+
+const user = {
+  name,
+  email,
+  password,
+  confirmPassword,
+};
+
+//Incluímos o value e o onChange nos inputs
+  <input
+    type="text"
+    placeholder="Nome"
+    value={name || ""}
+    onChange={(e) => setName(e.target.value)}
+  />
+  <input
+    type="email"
+    placeholder="Email"
+    value={email || ""}
+    onChange={(e) => setEmail(e.target.value)}
+  />
+  <input
+    type="password"
+    placeholder="Senha"
+    value={password || ""}
+    onChange={(e) => setPassword(e.target.value)}
+  />
+  <input
+    type="password"
+    placeholder="Confirme a Senha"
+    value={confirmPassword || ""}
+    onChange={(e) => setConfirmPassword(e.target.value)}
+  />
 ```
