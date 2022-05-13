@@ -517,3 +517,58 @@ const user = {
     onChange={(e) => setConfirmPassword(e.target.value)}
   />
 ```
+
+## Instalando o Redux no projeto frontend
+
+npm i react-redux
+
+Vamos no index.js e implementar o redux
+
+```tsx
+//Redux
+// importamos o Provider , ele guarda os dados e compartilha ao projeto como todo
+import { Provider } from "react-redux";
+//Aonde guardamos os dados ? criamos um arquivo único e trabalhamos com ele
+```
+
+Criamos um arquivo na raiz chamado store.js
+
+store.js
+
+```tsx
+import { ConfigureStore } from "@reduxjs/toolkit";
+
+export const store = configureStore({
+  reducer: {},
+});
+```
+
+Voltamos pro index.js e importamos o store.js
+
+```tsx
+import { store } from "./store";
+
+//envolvemos nossa aplicacao no Provider
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(
+  <React.StrictMode>
+    <Provider
+      store={store} //aqui compartilhamos todos context
+    >
+      <App />
+    </Provider>
+  </React.StrictMode>
+);
+```
+
+Criamos 2 pastas services e slices
+
+//criamos 1 arquivo para cada contexto no services
+//trabalha direto com a API
+services/
+
+//no slices criamos arquivos na base das acoes que criamos no serviço
+teremos uma ação de registro estado de loading estado de sucesso etc
+//Trabalhamos com estados
+slices/
