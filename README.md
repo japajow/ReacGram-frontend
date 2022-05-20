@@ -622,3 +622,44 @@ export const requestConfig = (method, data, token = null, image = null) => {
   return config;
 };
 ```
+
+## Criando service de autenticação
+
+No services/authService.js
+
+```tsx
+// importamos nosso api e a funcao requestConfig
+import { api, requestConfig } from "../utils/config";
+
+//criamos as funções HTTP registro do usuário
+const register = async (data) => {
+  //recebe os dados
+  // criamos a variável config chamando nosso requestConfig
+  // method POST com os dados
+  const config = requestConfig("POST", data);
+
+  // criamos o try catch para ver se deu erro ou nao na requisição
+  try {
+    // criamos a variável que pega a resposta  com método fetch
+    const res = await fetch(api + "/users/register", config)
+      .then((res) => res.json()) // se for sucesso transformamos a resposta em json
+      .catch((err) => err); // se der erro ele cai no catch
+
+    // Se receber uma resposta
+    if (res) {
+      // guardamos os dados na localStorage chamamos de user e transformamos em string
+      localStorage.setItem("user", JSON.stringify(res));
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// criamos um objeto e colocamos a funcao
+const authService = {
+  register,
+};
+
+// exportamos esse authService
+export default authService;
+```
