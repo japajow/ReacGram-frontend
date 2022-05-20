@@ -572,3 +572,53 @@ services/
 teremos uma ação de registro estado de loading estado de sucesso etc
 //Trabalhamos com estados
 slices/
+
+## Configurando requisições HTTP
+
+Criamos uma pasta chamada utils;config.js
+
+```tsx
+// fixamos http api na variável api
+export const api = "http://localhost:5000/api";
+// fixamos uploads para variável uploads de imagens
+export const uploads = "http://localhost:5000/uploads";
+
+// criamos a funcao requestConfig contendo parâmetros method , data , token iniciando como nulo e image
+export const requestConfig = (method, data, token = null, image = null) => {
+  // variável config que altera conforme a requisição
+  let config;
+
+  // se for imagem
+  if (image) {
+    // config com method, body com a data e o headers vazio
+    config = {
+      method,
+      body: data,
+      headers: {},
+    };
+    //se for DELETE ou nao tem dados
+  } else if (method === "DELETE" || data === null) {
+    // funcao de like nao tem dado, mas precisamos enviar algo
+    config = {
+      method,
+      headers: {},
+    };
+  } else {
+    // Quando vem dados , method que vem na requisição , body com JSON com stringify
+    config = {
+      method,
+      body: JSON.stringify(data),
+      headers: { "Content-type": "application-json" },
+    };
+  }
+
+  // verificamos se veio o token , se vier colocamos no headers
+  if (token) {
+    // colocar o token no headers no Authorization colocamos o Bearer com token
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+
+  // retornamos nosso config
+  return config;
+};
+```
