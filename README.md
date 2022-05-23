@@ -769,3 +769,46 @@ useEffect(() => {
   dispatch(reset());
 }, [dispatch]);
 ```
+
+## Criando componente de mensagem
+
+componente/Message/Message.js Message.css
+
+```tsx
+import React from "react";
+import "./Message.css";
+
+export const Message = ({ msg, type }) => {
+  return (
+    <div className={`message ${type}`}>
+      <p>{msg}</p>
+    </div>
+  );
+};
+```
+
+Message.css
+
+```css
+.message {
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #000;
+}
+
+.message.error {
+  color: #721c24;
+  background-color: #f8d7da;
+  border: #f5c6cb;
+}
+
+.message.success {
+  color: #155724;
+  background-color: #d4edda;
+  border: #c3e6cb;
+}
+```
