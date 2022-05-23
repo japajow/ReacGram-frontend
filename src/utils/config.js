@@ -17,9 +17,9 @@ export const requestConfig = (method, data, token = null, image = null) => {
     };
   } else {
     config = {
-      method,
+      method: method,
       body: JSON.stringify(data),
-      headers: { "Content-type": "application-json" },
+      headers: { "Content-Type": "application/json" },
     };
   }
 

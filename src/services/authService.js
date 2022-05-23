@@ -8,7 +8,9 @@ const register = async (data) => {
 
   try {
     const res = await fetch(api + "/users/register", config)
-      .then((res) => res.json())
+      .then((result) => {
+        return result.json();
+      })
       .catch((err) => err);
 
     if (res) {

@@ -666,7 +666,7 @@ export default authService;
 
 ## Criando slice de autenticação
 
-slece/authSlices.js
+slice/authSlices.js
 
 ```tsx
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
@@ -742,4 +742,30 @@ export const store = configureStore({
     auth: authReducer,
   },
 });
+```
+
+## Conectando formulário ao Reducer
+
+Vamos unir tudo que criamos register e slice
+
+Vamos no Auth/Register.js
+
+```tsx
+//importamos o hook
+import { useSelector, useDispatch } from "react-redux";
+// Redux
+import { register, reset } from "../../slices/authSlices";
+
+// criamos  dispatch com a funcao useDispatch()
+const dispatch = useDispatch();
+//pegamos o estado do loading e error usando o useSelector do redux
+const { loading, error } = useSelector((state) => state.auth);
+
+// adicionamos no dispatch o register com user
+dispatch(register(user));
+
+// criamos o useEffect para sempre atualizar o dispatch resetar tudo
+useEffect(() => {
+  dispatch(reset());
+}, [dispatch]);
 ```
