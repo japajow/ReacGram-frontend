@@ -855,7 +855,7 @@ import { api, requestConfig } from "../utils/config";
 //       localStorage.setItem("user", JSON.stringify(res));
 //     }
 
-    return res;
+return res;
 //   } catch (error) {
 //     console.log(error);
 //   }
@@ -866,5 +866,34 @@ import { api, requestConfig } from "../utils/config";
 // };
 
 // export default authService;
+```
 
+## Hook verificação de autenticação
+
+Criamos a pasta hooks/useAuth.js
+
+```tsx
+// useState e useEffect  e useSelector
+
+import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+
+export const useAuth = () => {
+  const { user } = useSelector((state) => state.auth);
+
+  const [auth, setAuth] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (user) {
+      setAuth(true);
+    } else {
+      setAuth(false);
+    }
+
+    setLoading(false);
+  }, [user]);
+
+  return { auth, loading };
+};
 ```
