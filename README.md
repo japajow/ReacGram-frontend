@@ -897,3 +897,31 @@ export const useAuth = () => {
   return { auth, loading };
 };
 ```
+
+## Verificando se o usuário esta autenticado
+
+No App.js
+
+```tsx
+//importamos nosso hook useAuth
+import { useAuth } from "./hooks/useAuth";
+
+//extraímos dentro de App na funcao dele o loading e o auth
+const { auth, loading } = useAuth();
+
+// se o loading for true  colocamos carregando
+if (loading) {
+  return <p>Carregando...</p>;
+}
+
+//ja no JSX
+//modificamos a rota
+<Routes>
+  <Route path="/" element={auth ? <Home /> : <Navigate to={"/login"} />} />
+  <Route path="/login" element={!auth ? <Login /> : <Navigate to={"/"} />} />
+  <Route
+    path="/register"
+    element={!auth ? <Register /> : <Navigate to={"/"} />}
+  />
+</Routes>;
+```
