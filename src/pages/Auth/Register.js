@@ -2,7 +2,7 @@ import React from "react";
 import "./Auth.css";
 
 //components
-
+import { Message } from "../../components/Message/Message";
 import { Link } from "react-router-dom";
 
 // Hooks
@@ -70,7 +70,9 @@ export const Register = () => {
           value={confirmPassword || ""}
           onChange={(e) => setConfirmPassword(e.target.value)}
         />
-        <input type="submit" value="Cadastrar" />
+        {!loading && <input type="submit" value="Cadastrar" />}
+        {loading && <input type="submit" value="Aguarde..." disabled />}
+        {error && <Message msg={error} type="error" />}
       </form>
       <p>
         Ja tem conta? <Link to={"/login"}>clique aqui</Link>

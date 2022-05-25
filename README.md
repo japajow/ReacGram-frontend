@@ -812,3 +812,29 @@ Message.css
   border: #c3e6cb;
 }
 ```
+
+## Exibindo validação do usuário
+
+No Register.js
+
+```tsx
+//importamos o componente Message
+import { Message } from "../../components/Message/Message";
+
+// utilizamos o loading e o error
+{
+  !loading && <input type="submit" value="Cadastrar" />;
+}
+{
+  loading && <input type="submit" value="Aguarde..." disabled />;
+}
+{
+  error && <Message msg={error} type="error" />;
+}
+```
+
+Ja no authService esquecemos de retornar return res;
+
+```tsx
+return res;
+```
