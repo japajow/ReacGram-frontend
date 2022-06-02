@@ -925,3 +925,61 @@ if (loading) {
   />
 </Routes>;
 ```
+
+## Navbar para usuários autenticados
+
+//Navbar tambem tem alterações dependendo se estiver logado ou nao
+
+Navbar.js
+
+```tsx
+//importamos os Hooks que vamos utilizar
+//Hooks
+import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import { useAuth } from "../../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
+
+// chamamos os use
+//verificar se esta logado ou nao
+const { auth } = useAuth();
+const { user } = useSelector((state) => state.auth);
+
+// JSX
+{
+  auth ? (
+    <>
+      <li>
+        <NavLink to={"/"}>
+          <BsHouseDoorFill />
+        </NavLink>
+      </li>
+      // verifica se o usuário esta logado primeiro
+      {user && (
+        <li>
+          <NavLink to={`/users/${user.id}`}></NavLink>
+        </li>
+      )}
+      <li>
+        <NavLink to={"/profile"}>
+          <BsFillPersonFill />
+        </NavLink>
+      </li>
+      <li>
+        <span>Sair</span>
+      </li>
+    </>
+  ) : (
+    <>
+      <li>
+        <NavLink to={"/login"}>Entrar</NavLink>
+      </li>
+      <li>
+        <NavLink to={"/register"}>Cadastrar</NavLink>
+      </li>
+    </>
+  );
+}
+
+//adicionamos novos links quando estamos logado
+```
