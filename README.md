@@ -1052,3 +1052,53 @@ const handleLogout = () => {
   <span onClick={handleLogout()}>Sair</span>
 </li>;
 ```
+
+## Criando formulário de login
+
+Login.js
+
+```tsx
+//importamos componentes e Hooks
+//COmponentes
+import { Message } from "../../components/Message/Message";
+import { Link } from "react-router-dom";
+
+//Hooks
+import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+
+// criamos os estados dos inputs
+const [email, setEmail] = useState("");
+const [password, setPassword] = useState("");
+
+//Criamos a funcao handleSubmit do formulário
+const handleSubmit = (e) => {
+  e.preventDefault();
+};
+
+//Criamos o JSX do formulário e lincamos o estados email e password nos inputs
+// colocamos o onSubmit a funcao handleSubmit
+
+<div id="login">
+  <h2>ReactGram</h2>
+  <p className="subtitle">Faça o login para ver o que há de novo</p>
+  <form onSubmit={handleSubmit}>
+    <input
+      type="text"
+      placeholder="E-mail"
+      onChange={(e) => setEmail(e.target.value)}
+      value={email || ""}
+    />
+    <input
+      type="password"
+      placeholder="Senha"
+      onChange={(e) => setPassword(e.target.value)}
+      value={password || ""}
+    />
+    <input type="submit" value="Entrar" />
+  </form>
+  <p>
+    Não tem uma conta ? <Link to={"/register"}>Clique aqui</Link>
+  </p>
+</div>;
+```
