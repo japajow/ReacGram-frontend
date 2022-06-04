@@ -983,3 +983,44 @@ const { user } = useSelector((state) => state.auth);
 
 //adicionamos novos links quando estamos logado
 ```
+
+## Funcao logout
+
+services/authService.js
+
+```tsx
+
+  Criamos a funcao logout
+  // logout and user
+const logout = () => {
+  localStorage.removeItem("user");
+};
+
+exportamos ele
+const authService = {
+  register,
+  logout,
+};
+
+```
+
+Agora no slices/authSlice.js
+
+```tsx
+
+  Chamamos o logout usando createAsyncThunk e nomeando ele
+
+  //logout and user
+export const logout = createAsyncThunk("auth/logout", async () => {
+  await authService.logout();
+});
+
+// Criamos um status
+ .addCase(logout.fulfilled, (state, action) => {
+        state.loading = false;
+        state.success = true;
+        state.error = null;
+        state.user = null;
+      });
+
+```
