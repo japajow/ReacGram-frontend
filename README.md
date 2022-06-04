@@ -1102,3 +1102,42 @@ const handleSubmit = (e) => {
   </p>
 </div>;
 ```
+
+## Adicionando o Service
+
+login no authService.js
+
+```tsx
+// Sign In an user
+//criamos a funcao que loga o usuário assíncrona
+const login = async (data) => {
+  //configuracao do request em POST  email e senha na data
+  const config = requestConfig("POST", data);
+
+  try {
+    //esperamos uma resposta de um fetch para url api /users/login e passamos o config
+    const res = await fetch(api + "/users/login", config)
+      // pega o dados e transforma em json
+      .then((res) => res.json())
+      // pega possível erro no retorno
+      .then((err) => err);
+
+    //verificamos se veio com sucesso se sim colocamos no localStorage
+    if (res) {
+      localStorage.setItem("user", JSON.stringify(res));
+    }
+
+    return res;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+//exportamos o login
+
+const authService = {
+  register,
+  logout,
+  login,
+};
+```
