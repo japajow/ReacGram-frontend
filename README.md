@@ -1024,3 +1024,31 @@ export const logout = createAsyncThunk("auth/logout", async () => {
       });
 
 ```
+
+## implementando o logout
+
+Navbar.js
+
+```tsx
+//importamos
+//Redux
+import { logout, reset } from "../../slices/authSlices";
+
+//chamamos a funcao dentro Navbar
+
+const navigate = useNavigate();
+
+const dispatch = useDispatch();
+
+// criamos a funcao do logout
+
+const handleLogout = () => {
+  dispatch(logout());
+  dispatch(reset());
+};
+
+//Adicionamos com onClick no Sair a funcao handleLogout
+<li>
+  <span onClick={handleLogout()}>Sair</span>
+</li>;
+```
